@@ -2,41 +2,52 @@ package com.bridgelabz.addressbookapp.entity;
 
 import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import lombok.Data;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.List;
+
 @Entity
+@Table(name = "address")
 @Data
 public class Address {
     @Id
-    @GeneratedValue
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     private String firstName;
     private String lastName;
     private long phoneNumber;
 
     private String email;
 
-    private String address;
-
+    @ElementCollection
+    @CollectionTable(name = "address1", joinColumns = @JoinColumn(name = "id"))
+    List<String> address;
     public Address() {
     }
     public Address(Integer id, AddressBookDTO addressBookDTO) {
         this.id = id;
         this.firstName = addressBookDTO.getFirstName();
         this.lastName = addressBookDTO.getLastName();
-
+        this.address = Collections.singletonList(addressBookDTO.getAddress());
     }
     public Address(AddressBookDTO addressBookDTO) {
+        this.id = id;
         this.firstName = addressBookDTO.getFirstName();
         this.lastName = addressBookDTO.getLastName();
-
+        this.address = Collections.singletonList(addressBookDTO.address);
     }
-    public Address(Integer id, String firstName, String lastName) {
+
+    public Address(Integer id, String firstName, String lastName, String address,String email,long phoneNumber) {
         super();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-
+        this.address = Collections.singletonList(address);
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
     public Integer getId() {
@@ -78,12 +89,11 @@ public class Address {
     public void setEmail(String email) {
         this.email = email;
     }
-
     public String getAddress() {
-        return address;
+        return address.toString();
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = Collections.singletonList(address);
     }
 }

@@ -15,11 +15,14 @@ public class AddressBookDTO {
     private String lastName;
 
 
-    public AddressBookDTO(String firstName, String lastName) {
+    @NotEmpty(message = "Address cant be empty")
+    public String address;
+
+    public AddressBookDTO(String firstName, String lastName, String address) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
-
+        this.address = address;
     }
 
     public String getFirstName() {
@@ -36,5 +39,13 @@ public class AddressBookDTO {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

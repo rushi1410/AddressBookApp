@@ -4,20 +4,16 @@ import com.bridgelabz.addressbookapp.dto.AddressBookDTO;
 import com.bridgelabz.addressbookapp.entity.Address;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IAddressBookService {
 
-     Address saveDataToRepo(AddressBookDTO addressBookDTO);
+     public Address saveDataToRepo(AddressBookDTO addressBookDTO);
 
+     public Address getRecordById(Integer id);
 
-     List<Address> getRecord();
-     List<Address> getRecordByFirstName(String firstName);
-     List<Address> getRecordByName();
-     public Optional<Address> getRecordById(Integer id);
+     public List<Address> getRecord();
 
-     Address updateRecordById(Integer id, AddressBookDTO addressBookDTO);
+     public Address updateRecordById(Integer id, AddressBookDTO addressBookDTO);
 
-     String deleteRecordById(Integer id);
-
+     public String deleteRecordById(Integer id);
 }
